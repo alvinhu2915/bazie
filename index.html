@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>小胡子命理黑金館｜八字試算 Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans TC", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 24px 20px 28px;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .title-block h1 {
+      font-size: 24px;
+      letter-spacing: 0.12em;
+    }
+
+    .title-block p {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 204, 21, 0.7);
+      font-size: 11px;
+      color: #facc15;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .app {
+        padding: 16px 14px 22px;
+      }
+
+      .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .card h2 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card h2::before {
+      content: "●";
+      font-size: 10px;
+      color: #f97316;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .row > div {
+      flex: 1;
+    }
+
+    input,
+    select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      padding: 6px 11px;
+      color: #f9fafb;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4);
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      border: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .result {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #e5e7eb;
+      white-space: pre-line;
+      min-height: 150px;
+    }
+
+    .tag-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.9);
+      border: 1px dashed rgba(75, 85, 99, 0.9);
+      color: #9ca3af;
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 10px;
+      color: #6b7280;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="app-header">
+      <div class="title-block">
+        <h1>小胡子命理黑金館</h1>
+        <p>線上八字簡易試算（體驗版 Demo）</p>
+      </div>
+      <div class="badge">
+        <span></span> 測試版 · 僅供參考不取代專業命理
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- 左邊：輸入區 -->
+      <div class="card">
+        <h2>基本資料輸入</h2>
+
+        <div class="row">
+          <div>
+            <label>公曆生日（西元）</label>
+            <input id="birthDate" type="date" />
+          </div>
+          <div>
+            <label>出生時間</label>
+            <select id="birthHour">
+              <option value="">不確定時辰</option>
+              <option value="23">子時 23:00–00:59</option>
+              <option value="1">丑時 01:00–02:59</option>
+              <option value="3">寅時 03:00–04:59</option>
+              <option value="5">卯時 05:00–06:59</option>
+              <option value="7">辰時 07:00–08:59</option>
+              <option value="9">巳時 09:00–10:59</option>
+              <option value="11">午時 11:00–12:59</option>
+              <option value="13">未時 13:00–14:59</option>
+              <option value="15">申時 15:00–16:59</option>
+              <option value="17">酉時 17:00–18:59</option>
+              <option value="19">戌時 19:00–20:59</option>
+              <option value="21">亥時 21:00–22:59</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>性別</label>
+            <select id="gender">
+              <option value="female">女性</option>
+              <option value="male">男性</option>
+            </select>
+          </div>
+          <div>
+            <label>出生地</label>
+            <input id="birthPlace" type="text" placeholder="例如：台北市" />
+          </div>
+        </div>
+
+        <button onclick="fakeCalc()">生成體驗版分析</button>
+        <p class="hint">
+          ※ 本頁僅為展示介面與示意說明，尚未連接真實命理演算程式。
+        </p>
+      </div>
+
+      <!-- 右邊：結果區 -->
+      <div class="card">
+        <h2>簡易解析（Demo）</h2>
+        <div id="result" class="result">
+          請先在左側輸入您的出生資料，點擊「生成體驗版分析」，
+即可看到示意解析內容。
+
+正式版本上線後，將依據您的八字排盤，提供更完整的流年、事業、感情與財運建議。
+        </div>
+
+        <div class="tag-row">
+          <div class="tag">八字排盤 Demo</div>
+          <div class="tag">線上預約諮詢入口</div>
+          <div class="tag">之後可接金流系統</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2026 小胡子命理黑金館 · 本頁僅為展示樣板，不作實際命理依據
+    </div>
+  </div>
+
+  <script>
+    // 這裡只是做個「假裝有計算」的示意，之後可換成真正的八字程式
+    function fakeCalc() {
+      const date = document.getElementById("birthDate").value;
+      const hour = document.getElementById("birthHour").value;
+      const gender = document.getElementById("gender").value;
+      const place = document.getElementById("birthPlace").value.trim();
+
+      if (!date) {
+        alert("請先選擇公曆生日。");
+        return;
+      }
+
+      let text = "【體驗版示意解析】\n\n";
+      text += "生日：" + date + (hour ? "，含時辰" : "（未輸入時辰）") + "\n";
+      text += "性別：" + (gender === "female" ? "女性" : "男性") + "\n";
+      if (place) text += "出生地：" + place + "\n";
+
+      text +=
+        "\n目前僅為展示畫面，尚未連接正式八字演算法。\n" +
+        "正式版上線後，這裡會顯示：\n" +
+        "• 年柱、月柱、日柱、時柱與五行強弱\n" +
+        "• 事業、財運、感情、健康重點提醒\n" +
+        "• 2026–2035 十年整體趨勢建議\n\n" +
+        "若您有興趣之後讓小胡子幫您做完整版命盤解析，\n" +
+        "可以保留此頁網址，未來會開放線上預約與付費服務。";
+
+      document.getElementById("result").textContent = text;
+    }
+  </script>
+</body>
+</html>
