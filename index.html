@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>小胡子命理黑金館｜線上八字試算 Demo</title>
+  <title>小胡子命理黑金館｜線上八字試算</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * {
@@ -25,26 +25,28 @@
 
     .app {
       width: 100%;
-      max-width: 1024px;
+      max-width: 1080px;
       background: radial-gradient(circle at top left,
           rgba(251, 191, 36, 0.08),
           transparent 55%),
         rgba(15, 23, 42, 0.96);
       border-radius: 24px;
       border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
       padding: 22px 22px 26px;
       backdrop-filter: blur(8px);
     }
+
+    /* 頂部區 */
 
     .app-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border-bottom: 1px solid rgba(55, 65, 81, 0.9);
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
 
     .logo-block {
@@ -109,14 +111,16 @@
       color: #9ca3af;
     }
 
+    /* 主體雙欄 */
+
     .layout {
       display: grid;
       grid-template-columns: 1.2fr 1.6fr;
       gap: 18px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
-    @media (max-width: 840px) {
+    @media (max-width: 900px) {
       .layout {
         grid-template-columns: 1fr;
       }
@@ -252,7 +256,7 @@
       line-height: 1.7;
       color: #e5e7eb;
       white-space: pre-line;
-      min-height: 160px;
+      min-height: 170px;
     }
 
     .result-tagline {
@@ -279,7 +283,7 @@
       gap: 6px;
     }
 
-    @media (max-width: 840px) {
+    @media (max-width: 900px) {
       .steps-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -299,6 +303,85 @@
       font-weight: 600;
       margin-right: 4px;
     }
+
+    /* 服務項目區 */
+
+    .services {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .services-header h3 {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+    }
+
+    .services-header p {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-card {
+      border-radius: 14px;
+      border: 1px solid rgba(75, 85, 99, 0.95);
+      background: linear-gradient(145deg,
+          rgba(17, 24, 39, 0.98),
+          rgba(15, 23, 42, 0.96));
+      padding: 10px 11px 11px;
+      font-size: 12px;
+    }
+
+    .service-title {
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #facc15;
+    }
+
+    .service-price {
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+    }
+
+    .service-desc {
+      font-size: 11px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .service-tag {
+      margin-top: 6px;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      display: inline-block;
+      color: #e5e7eb;
+    }
+
+    /* 底部 */
 
     .footer {
       margin-top: 14px;
@@ -329,15 +412,15 @@
         <div class="logo-circle">胡</div>
         <div class="title-text">
           <h1>小胡子命理黑金館</h1>
-          <p>線上八字 · 品牌官網 Demo 版</p>
+          <p>線上八字試算 × 品牌形象 Demo 版</p>
         </div>
       </div>
       <div class="badge-row">
         <div class="badge">
           <div class="badge-dot"></div>
-          <span>內測中 · 僅供體驗，不做實際斷命依據</span>
+          <span>系統內測中 · 解讀內容僅供體驗參考</span>
         </div>
-        <div class="badge-sub">正式版預計：2026 年開放線上付費諮詢</div>
+        <div class="badge-sub">正式版預計 2026 年開放線上付費諮詢</div>
       </div>
     </div>
 
@@ -347,7 +430,7 @@
       <div class="card">
         <h2><span class="dot"></span> 基本資料輸入區</h2>
         <p class="card-subtitle">
-          先幫你做一份「示意命盤解析」，之後正式版會接上真正的八字排盤系統。
+          目前為「年柱＋五行」示意版，讓你感受未來正式版流程與風格。
         </p>
 
         <div class="row">
@@ -385,22 +468,21 @@
           </div>
           <div>
             <label>出生地</label>
-            <input id="birthPlace" type="text" placeholder="例如：台北市" />
+            <input id="birthPlace" type="text" placeholder="例：台北市 / 高雄市" />
           </div>
         </div>
 
-        <button onclick="fakeCalc()">生成體驗版解析</button>
+        <button onclick="calcBazi()">生成年柱＋五行示意解析</button>
 
         <p class="hint">
-          ※ 本頁為展示介面 Demo，尚未串接真正八字演算法。<br />
-          若看完覺得風格喜歡，之後可直接沿用此頁作為正式收費入口。
+          ※ 本系統目前只計算「年柱＋五行傾向」，視為 Demo 體驗版。<br />
+          真正專業諮詢仍需搭配月、日、時柱與大運流年，由小胡子親自解讀。
         </p>
 
         <div class="pill-row">
-          <div class="pill">八字 Demo 版</div>
-          <div class="pill">未來接金流系統</div>
-          <div class="pill">可嵌入預約表單</div>
-          <div class="pill">手機版排版優化</div>
+          <div class="pill">年柱干支試算</div>
+          <div class="pill">五行屬性簡易解說</div>
+          <div class="pill">之後可接正式八字引擎</div>
         </div>
       </div>
 
@@ -408,103 +490,233 @@
       <div class="card">
         <h2><span class="dot"></span> 示意解析結果區</h2>
         <p class="card-subtitle">
-          正式版會顯示你的年柱、月柱、日柱、時柱與五行強弱，現在先用文字版 Demo 帶你感受流程。
+          先用年柱的干支與五行，搭配性別、簡單給你一個「氣質與大方向」感覺。
         </p>
 
         <div id="result" class="result-main">
-請先在左側輸入您的基本資料，然後點擊「生成體驗版解析」。
+請先在左側輸入您的生日與基本資料，然後點擊「生成年柱＋五行示意解析」。
 
-正式版上線後，這裡會看到：
-• 你的四柱八字基本結構說明
-• 事業／財運／感情／健康 的關鍵關鍵提醒
-• 2026–2035 十年整體趨勢建議
-• 小胡子的個人提醒與生活建議
+系統會幫你做三件事：
+1. 用西元年份推算出你的「年柱干支」（例如：甲子年、丙寅年……）
+2. 找出該天干所屬五行（木火土金水），作為你的整體氣質底色
+3. 用文字說明這種五行調性的優點、盲點與大致適合發展方向
 
-目前為 Demo 畫面，內容僅為示意文字，不作實際命理解讀依據。
+目前是示意版，不取代正式命理判斷，但可以先用來玩玩、感受一下風格。
         </div>
 
         <div class="result-tagline">
-          小提醒：真正的命盤重在「對話與陪伴」，線上系統只是幫忙加速排盤與整理重點。
+          提醒：命盤不是限制你的人生，而是幫你看見「比較順的節奏」。
         </div>
 
         <div class="steps">
-          <div class="steps-title">未來正式版服務流程預計：</div>
+          <div class="steps-title">未來正式服務流程規劃（草案）：</div>
           <div class="steps-grid">
             <div class="step-item">
-              <span>01</span> 線上填寫基本資料與聯絡方式
+              <span>01</span> 線上填寫基本資料、問題與聯絡方式
             </div>
             <div class="step-item">
-              <span>02</span> 系統自動排盤＋產出初步分析
+              <span>02</span> 系統自動排盤，產出初步報告
             </div>
             <div class="step-item">
-              <span>03</span> 小胡子親自人工覆盤與補充
+              <span>03</span> 小胡子人工覆盤，加入生活化解讀
             </div>
             <div class="step-item">
-              <span>04</span> 約定線上或面談時間進行說明
+              <span>04</span> 約時間線上或面談一對一說明
             </div>
             <div class="step-item">
-              <span>05</span> 提供 PDF／文字版重點整理
+              <span>05</span> 提供 PDF / 文字版重點整理
             </div>
             <div class="step-item">
-              <span>06</span> 後續一年內可追蹤 1～2 次狀況
+              <span>06</span> 後續一年內可追蹤 1～2 次近況
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 服務項目區 -->
+    <div class="services" id="services">
+      <div class="services-header">
+        <h3>服務項目 · 草案</h3>
+        <p>這裡可以當成之後正式官網的「產品列表」，慢慢調整內容與價格。</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-title">A. 線上八字簡易試算</div>
+          <div class="service-price">目前：Demo 免費體驗</div>
+          <div class="service-desc">
+            透過系統快速生成年柱與五行傾向，搭配 3～5 點生活提醒，適合先感受命理風格、互相認識。
+          </div>
+          <div class="service-tag">未來可嵌入自動回信＋PDF</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-title">B. 深度命盤解析（90 分鐘）</div>
+          <div class="service-price">建議售價：NT$ 2,XXX～3,XXX（可再調整）</div>
+          <div class="service-desc">
+            以四柱八字搭配大運流年，針對事業、財務、感情、人際逐一說明，並給出 1～3 年內可操作的行動方向。
+          </div>
+          <div class="service-tag">可搭配線上諮詢＋錄音檔</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-title">C. 年度流年整理＋追蹤</div>
+          <div class="service-price">建議售價：NT$ 1,XXX 起（視內容調整）</div>
+          <div class="service-desc">
+            每年幫你整理當年度重點月份與注意事項，可加價搭配半年或一年的追蹤，適合正在轉職、創業或人生轉折期的朋友。
+          </div>
+          <div class="service-tag">之後可加購「進階會員」方案</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 底部 -->
     <div class="footer">
-      <div>© 2026 小胡子命理黑金館 · Demo 版頁面 · 僅供展示與測試</div>
+      <div>© 2026 小胡子命理黑金館 · 本頁為 Demo 版 · 不作實際命理依據</div>
       <div>
-        未來可放：<a href="#">LINE 預約連結</a> ·
+        之後可放：<a href="#">LINE 預約</a> ·
         <a href="#">IG / FB 粉專</a>
       </div>
     </div>
   </div>
 
   <script>
-    // Demo：假裝有在算命，實際只是組合說明文字
-    function fakeCalc() {
-      const date = document.getElementById("birthDate").value;
-      const hour = document.getElementById("birthHour").value;
-      const gender = document.getElementById("gender").value;
-      const place = document.getElementById("birthPlace").value.trim();
+    // ===== 八字基礎：年柱＋五行演算法（簡化示意版） =====
 
-      if (!date) {
+    const STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+    const BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+
+    const HOUR_BRANCH = [
+      { value: "23", name: "子" },
+      { value: "1", name: "丑" },
+      { value: "3", name: "寅" },
+      { value: "5", name: "卯" },
+      { value: "7", name: "辰" },
+      { value: "9", name: "巳" },
+      { value: "11", name: "午" },
+      { value: "13", name: "未" },
+      { value: "15", name: "申" },
+      { value: "17", name: "酉" },
+      { value: "19", name: "戌" },
+      { value: "21", name: "亥" }
+    ];
+
+    function getYearStemBranch(year) {
+      // 以 1984 甲子年為基準
+      const base = 1984;
+      let offset = year - base;
+      // 防負數
+      offset = ((offset % 60) + 60) % 60;
+      const stem = STEMS[offset % 10];
+      const branch = BRANCHES[offset % 12];
+      return { stem, branch, text: stem + branch + "年" };
+    }
+
+    function getElementOfStem(stem) {
+      if (["甲", "乙"].includes(stem)) return "木";
+      if (["丙", "丁"].includes(stem)) return "火";
+      if (["戊", "己"].includes(stem)) return "土";
+      if (["庚", "辛"].includes(stem)) return "金";
+      return "水"; // 壬、癸
+    }
+
+    function getElementDescription(element, gender) {
+      const isFemale = gender === "female";
+      switch (element) {
+        case "木":
+          return (
+            "五行屬木，代表成長、延伸與理想感。\n" +
+            (isFemale
+              ? "個性多半帶有溫柔與韌性，重感情也重義氣，對家人與朋友很用心。"
+              : "個性多半直率、有想法，遇到事情不喜歡拖泥帶水，講求方向感。") +
+            "\n職涯上適合與教育、設計、顧問、文化相關的領域，或是需要持續學習成長的工作。"
+          );
+        case "火":
+          return (
+            "五行屬火，代表熱情、表現與爆發力。\n" +
+            (isFemale
+              ? "你身上有一種容易成為焦點的氣場，對喜歡的事情投入度很高，也很看重被理解與支持。"
+              : "你行動力強、反應快，有時候講話直接一點，但多半出於真心與急性子。") +
+            "\n職涯上適合需要舞台感或溝通互動多的角色，例如業務、行銷、表演、創業等。"
+          );
+        case "土":
+          return (
+            "五行屬土，代表穩定、承擔與現實感。\n" +
+            "你多半給人可靠、踏實的印象，事情到了你手上，別人會比較放心，雖然有時候也會比較悶在心裡。 " +
+            "\n職涯上適合需要長期耕耘的領域，例如不動產、金融、行政管理、顧問、背後支撐型角色。"
+          );
+        case "金":
+          return (
+            "五行屬金，代表規則、判斷與執行力。\n" +
+            (isFemale
+              ? "你在原則與界線上比較清楚，對自己要求也不算低，做事希望有效率、有成果。"
+              : "你適合扛責任，也有能力做決策，只是有時候要記得放鬆，不用每件事都硬撐。") +
+            "\n職涯上適合需要分析、管理、制度面較明確的產業，如金融、法律、管理職、科技等。"
+          );
+        case "水":
+        default:
+          return (
+            "五行屬水，代表流動、智慧與彈性。\n" +
+            "你觀察力細膩、感受力強，會習慣先看清楚周遭再行動，適合做需要溝通協調、洞察人心的工作。" +
+            "\n職涯上適合顧問、諮商、旅遊服務、國際貿易、寫作、自媒體等需要流動與變化的領域。"
+          );
+      }
+    }
+
+    function getHourBranchText(hourValue) {
+      if (!hourValue) return "（未輸入時辰，此處暫以年柱為主。）";
+      const found = HOUR_BRANCH.find(h => h.value === hourValue);
+      if (!found) return "";
+      return "時柱地支約為「" + found.name + "時」，正式版會再搭配日柱一起細看作息與生活節奏。";
+    }
+
+    function calcBazi() {
+      const dateValue = document.getElementById("birthDate").value;
+      const hourValue = document.getElementById("birthHour").value;
+      const genderValue = document.getElementById("gender").value;
+      const placeValue = document.getElementById("birthPlace").value.trim();
+
+      if (!dateValue) {
         alert("請先選擇公曆生日喔！");
         return;
       }
 
-      let text = "【體驗版示意解析】\n\n";
-      text += "生日： " + date + (hour ? "（含時辰）" : "（未輸入時辰）") + "\n";
-      text += "性別： " + (gender === "female" ? "女性" : "男性") + "\n";
-      if (place) text += "出生地： " + place + "\n";
+      const d = new Date(dateValue);
+      if (isNaN(d.getTime())) {
+        alert("日期格式好像怪怪的，再確認一次～");
+        return;
+      }
 
-      text +=
-        "\n目前此頁仍為 Demo 版，尚未串接真正八字演算法，所以下面的內容是「示意說明」，讓你先感受之後正式版會長怎樣：\n\n";
+      const year = d.getFullYear();
+      const { stem, branch, text } = getYearStemBranch(year);
+      const element = getElementOfStem(stem);
+      const elementDesc = getElementDescription(element, genderValue);
+      const hourBranchText = getHourBranchText(hourValue);
 
-      text +=
-        "．命盤結構示意：\n" +
-        "  未來正式版會在這裡列出你的年柱、月柱、日柱、時柱，搭配五行強弱，\n" +
-        "  並用比較生活化的方式解釋，例如「火比較旺、土較弱」，代表什麼樣的個性與狀態。\n\n";
+      let header =
+        "【小胡子黑金館 · 年柱＋五行示意解析】\n\n" +
+        "生日（西元）： " + dateValue + "\n" +
+        "性別： " + (genderValue === "female" ? "女性" : "男性") + "\n";
+      if (placeValue) header += "出生地： " + placeValue + "\n";
 
-      text +=
-        "．生活面向提醒：\n" +
-        "  事業與財運：會說明你在工作節奏、適合的產業、財務決策上，可以注意哪些節點。\n" +
-        "  感情與人際：提醒你在人際互動、親密關係上，在哪些時期要特別留意溝通與界線。\n" +
-        "  健康與作息：從命盤節奏搭配流年，提醒你睡眠、壓力、情緒方面需要照顧的年份。\n\n";
+      header += "\n一、年柱干支（示意）：\n";
+      header += "　▶ 推算結果：約為「" + text + "」\n";
+      header += "　　其中「" + stem + "」屬天干，「" + branch + "」屬地支。\n";
 
-      text +=
-        "．2026－2035 十年趨勢示意：\n" +
-        "  正式版會抓出幾個重點年份，幫你標註「適合衝刺／適合調整／適合休息」的週期，\n" +
-        "  讓你在做重大決策（換工作、投資、搬家、結婚等）時，多一個參考視角。\n\n";
+      header += "\n二、五行屬性（以年干為底色）：\n";
+      header += "　▶ 年干「" + stem + "」五行屬：「" + element + "」\n\n";
+      header += elementDesc + "\n";
 
-      text +=
-        "最後提醒：真正的命理不是決定你「能不能」，而是幫你看清「什麼時候、怎麼做比較順」。\n" +
-        "未來若你想做正式版命盤解析，小胡子會用這套系統加上人工判讀，陪你一起看接下來的路。\n";
+      header += "\n三、時辰與生活節奏（簡述）：\n";
+      header += "　▶ " + hourBranchText + "\n";
 
-      document.getElementById("result").textContent = text;
+      header +=
+        "\n四、小胡子的溫馨提醒：\n" +
+        "　1. 目前僅以「年柱」與「五行」做大方向示意，正式判讀仍需加入月、日、時柱與大運流年。\n" +
+        "　2. 命盤不是標籤，而是看見你的節奏與強項，幫你選擇更順的路，而不是把你關在框架裡。\n" +
+        "　3. 若未來想做正式版解析，可以把這個畫面截圖留存，當成預約時的參考資料。\n";
+
+      document.getElementById("result").textContent = header;
     }
   </script>
 </body>
