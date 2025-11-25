@@ -2,20 +2,20 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>小胡子命理黑金館｜八字試算 Demo</title>
+  <title>小胡子命理黑金館｜線上八字試算 Demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Noto Sans TC", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Noto Sans TC", sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1f2937, #020617);
+      background: radial-gradient(circle at top, #111827, #020617);
       color: #f9fafb;
       display: flex;
       align-items: center;
@@ -25,105 +25,159 @@
 
     .app {
       width: 100%;
-      max-width: 900px;
-      background: rgba(15, 23, 42, 0.96);
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 24px 20px 28px;
+      max-width: 1024px;
+      background: radial-gradient(circle at top left,
+          rgba(251, 191, 36, 0.08),
+          transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      padding: 22px 22px 26px;
+      backdrop-filter: blur(8px);
     }
 
     .app-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       margin-bottom: 20px;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+      padding-bottom: 12px;
     }
 
-    .title-block h1 {
-      font-size: 24px;
-      letter-spacing: 0.12em;
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .title-block p {
-      font-size: 13px;
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fbbf24, #92400e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.6);
+    }
+
+    .title-text h1 {
+      font-size: 22px;
+      letter-spacing: 0.18em;
+    }
+
+    .title-text p {
+      font-size: 12px;
       color: #9ca3af;
-      margin-top: 4px;
+      margin-top: 2px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      font-size: 11px;
     }
 
     .badge {
-      padding: 6px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
-      border: 1px solid rgba(250, 204, 21, 0.7);
-      font-size: 11px;
+      border: 1px solid rgba(250, 204, 21, 0.85);
       color: #facc15;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      background: rgba(17, 24, 39, 0.9);
     }
 
-    .badge span {
-      width: 6px;
-      height: 6px;
+    .badge-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 8px #22c55e;
+      box-shadow: 0 0 10px #22c55e;
     }
 
-    .grid {
+    .badge-sub {
+      color: #9ca3af;
+    }
+
+    .layout {
       display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 16px;
+      grid-template-columns: 1.2fr 1.6fr;
+      gap: 18px;
+      margin-top: 16px;
     }
 
-    @media (max-width: 768px) {
-      .grid {
+    @media (max-width: 840px) {
+      .layout {
         grid-template-columns: 1fr;
       }
 
       .app {
         padding: 16px 14px 22px;
+        border-radius: 18px;
       }
 
       .app-header {
         flex-direction: column;
         align-items: flex-start;
       }
+
+      .badge-row {
+        align-items: flex-start;
+      }
     }
 
     .card {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 14px;
+      background: radial-gradient(circle at top,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.98));
+      border-radius: 16px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
       padding: 14px 14px 16px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
     }
 
     .card h2 {
       font-size: 15px;
-      margin-bottom: 10px;
-      display: flex;
+      margin-bottom: 8px;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .card h2::before {
-      content: "●";
-      font-size: 10px;
-      color: #f97316;
+    .card h2 span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #f97316, #facc15);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.7);
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 10px;
     }
 
     label {
       display: block;
-      font-size: 13px;
-      margin-bottom: 4px;
+      font-size: 12px;
       color: #e5e7eb;
+      margin-bottom: 3px;
     }
 
     .row {
       display: flex;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .row > div {
@@ -135,11 +189,15 @@
       width: 100%;
       background: rgba(15, 23, 42, 0.9);
       border-radius: 999px;
-      border: 1px solid rgba(75, 85, 99, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.95);
       padding: 6px 11px;
       color: #f9fafb;
       font-size: 13px;
       outline: none;
+    }
+
+    input::placeholder {
+      color: #6b7280;
     }
 
     input:focus,
@@ -150,75 +208,147 @@
 
     button {
       width: 100%;
-      background: linear-gradient(135deg, #f97316, #facc15);
-      border: none;
-      border-radius: 999px;
+      margin-top: 6px;
       padding: 8px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f97316, #facc15);
       color: #111827;
       font-size: 14px;
       font-weight: 600;
-      cursor: pointer;
-      margin-top: 4px;
+      letter-spacing: 0.06em;
     }
 
     button:hover {
-      filter: brightness(1.05);
+      filter: brightness(1.06);
     }
 
     .hint {
       font-size: 11px;
       color: #9ca3af;
-      margin-top: 4px;
+      margin-top: 6px;
+      line-height: 1.5;
     }
 
-    .result {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #e5e7eb;
-      white-space: pre-line;
-      min-height: 150px;
-    }
-
-    .tag-row {
-      margin-top: 10px;
+    .pill-row {
+      margin-top: 9px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      font-size: 11px;
     }
 
-    .tag {
-      padding: 3px 8px;
+    .pill {
+      font-size: 10px;
+      padding: 3px 7px;
       border-radius: 999px;
-      background: rgba(31, 41, 55, 0.9);
       border: 1px dashed rgba(75, 85, 99, 0.9);
       color: #9ca3af;
+      background: rgba(17, 24, 39, 0.9);
+    }
+
+    .result-main {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #e5e7eb;
+      white-space: pre-line;
+      min-height: 160px;
+    }
+
+    .result-tagline {
+      font-size: 11px;
+      color: #facc15;
+      margin-top: 8px;
+    }
+
+    .steps {
+      margin-top: 10px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+      padding-top: 8px;
+    }
+
+    .steps-title {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    @media (max-width: 840px) {
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .step-item {
+      font-size: 10px;
+      border-radius: 10px;
+      padding: 6px 7px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(17, 24, 39, 0.9);
+      color: #d1d5db;
+    }
+
+    .step-item span {
+      color: #f97316;
+      font-weight: 600;
+      margin-right: 4px;
     }
 
     .footer {
       margin-top: 14px;
       font-size: 10px;
       color: #6b7280;
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #9ca3af;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(148, 163, 184, 0.7);
+    }
+
+    .footer a:hover {
+      color: #e5e7eb;
     }
   </style>
 </head>
 <body>
   <div class="app">
+    <!-- 頂部 Logo 區 -->
     <div class="app-header">
-      <div class="title-block">
-        <h1>小胡子命理黑金館</h1>
-        <p>線上八字簡易試算（體驗版 Demo）</p>
+      <div class="logo-block">
+        <div class="logo-circle">胡</div>
+        <div class="title-text">
+          <h1>小胡子命理黑金館</h1>
+          <p>線上八字 · 品牌官網 Demo 版</p>
+        </div>
       </div>
-      <div class="badge">
-        <span></span> 測試版 · 僅供參考不取代專業命理
+      <div class="badge-row">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          <span>內測中 · 僅供體驗，不做實際斷命依據</span>
+        </div>
+        <div class="badge-sub">正式版預計：2026 年開放線上付費諮詢</div>
       </div>
     </div>
 
-    <div class="grid">
-      <!-- 左邊：輸入區 -->
+    <!-- 主體雙欄 -->
+    <div class="layout">
+      <!-- 左：輸入區 -->
       <div class="card">
-        <h2>基本資料輸入</h2>
+        <h2><span class="dot"></span> 基本資料輸入區</h2>
+        <p class="card-subtitle">
+          先幫你做一份「示意命盤解析」，之後正式版會接上真正的八字排盤系統。
+        </p>
 
         <div class="row">
           <div>
@@ -226,7 +356,7 @@
             <input id="birthDate" type="date" />
           </div>
           <div>
-            <label>出生時間</label>
+            <label>出生時間（時辰）</label>
             <select id="birthHour">
               <option value="">不確定時辰</option>
               <option value="23">子時 23:00–00:59</option>
@@ -259,34 +389,82 @@
           </div>
         </div>
 
-        <button onclick="fakeCalc()">生成體驗版分析</button>
+        <button onclick="fakeCalc()">生成體驗版解析</button>
+
         <p class="hint">
-          ※ 本頁僅為展示介面與示意說明，尚未連接真實命理演算程式。
+          ※ 本頁為展示介面 Demo，尚未串接真正八字演算法。<br />
+          若看完覺得風格喜歡，之後可直接沿用此頁作為正式收費入口。
         </p>
+
+        <div class="pill-row">
+          <div class="pill">八字 Demo 版</div>
+          <div class="pill">未來接金流系統</div>
+          <div class="pill">可嵌入預約表單</div>
+          <div class="pill">手機版排版優化</div>
+        </div>
       </div>
 
-      <!-- 右邊：結果區 -->
+      <!-- 右：結果＋說明 -->
       <div class="card">
-        <h2>簡易解析（Demo）</h2>
-        <div id="result" class="result">
-          請先在左側輸入您的出生資料，點擊「生成體驗版分析」，\n即可看到示意解析內容。\n\n正式版本上線後，將依據您的八字排盤，提供更完整的流年、事業、感情與財運建議。
+        <h2><span class="dot"></span> 示意解析結果區</h2>
+        <p class="card-subtitle">
+          正式版會顯示你的年柱、月柱、日柱、時柱與五行強弱，現在先用文字版 Demo 帶你感受流程。
+        </p>
+
+        <div id="result" class="result-main">
+請先在左側輸入您的基本資料，然後點擊「生成體驗版解析」。
+
+正式版上線後，這裡會看到：
+• 你的四柱八字基本結構說明
+• 事業／財運／感情／健康 的關鍵關鍵提醒
+• 2026–2035 十年整體趨勢建議
+• 小胡子的個人提醒與生活建議
+
+目前為 Demo 畫面，內容僅為示意文字，不作實際命理解讀依據。
         </div>
 
-        <div class="tag-row">
-          <div class="tag">八字排盤 Demo</div>
-          <div class="tag">線上預約諮詢入口</div>
-          <div class="tag">之後可接金流系統</div>
+        <div class="result-tagline">
+          小提醒：真正的命盤重在「對話與陪伴」，線上系統只是幫忙加速排盤與整理重點。
+        </div>
+
+        <div class="steps">
+          <div class="steps-title">未來正式版服務流程預計：</div>
+          <div class="steps-grid">
+            <div class="step-item">
+              <span>01</span> 線上填寫基本資料與聯絡方式
+            </div>
+            <div class="step-item">
+              <span>02</span> 系統自動排盤＋產出初步分析
+            </div>
+            <div class="step-item">
+              <span>03</span> 小胡子親自人工覆盤與補充
+            </div>
+            <div class="step-item">
+              <span>04</span> 約定線上或面談時間進行說明
+            </div>
+            <div class="step-item">
+              <span>05</span> 提供 PDF／文字版重點整理
+            </div>
+            <div class="step-item">
+              <span>06</span> 後續一年內可追蹤 1～2 次狀況
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- 底部 -->
     <div class="footer">
-      © 2026 小胡子命理黑金館 · 本頁僅為展示樣板，不作實際命理依據
+      <div>© 2026 小胡子命理黑金館 · Demo 版頁面 · 僅供展示與測試</div>
+      <div>
+        未來可放：<a href="#">LINE 預約連結</a> ·
+        <a href="#">IG / FB 粉專</a>
+      </div>
     </div>
   </div>
 
   <script>
-    // 這裡只是做「假裝有計算」的示意，未連接真正八字邏輯
+    // Demo：假裝有在算命，實際只是組合說明文字
     function fakeCalc() {
       const date = document.getElementById("birthDate").value;
       const hour = document.getElementById("birthHour").value;
@@ -294,23 +472,37 @@
       const place = document.getElementById("birthPlace").value.trim();
 
       if (!date) {
-        alert("請先選擇公曆生日。");
+        alert("請先選擇公曆生日喔！");
         return;
       }
 
-      let text = "【體驗版示意解析】\\n\\n";
-      text += "生日：" + date + (hour ? "，含時辰" : "（未輸入時辰）") + "\\n";
-      text += "性別：" + (gender === "female" ? "女性" : "男性") + "\\n";
-      if (place) text += "出生地：" + place + "\\n";
+      let text = "【體驗版示意解析】\n\n";
+      text += "生日： " + date + (hour ? "（含時辰）" : "（未輸入時辰）") + "\n";
+      text += "性別： " + (gender === "female" ? "女性" : "男性") + "\n";
+      if (place) text += "出生地： " + place + "\n";
 
       text +=
-        "\\n目前僅為展示畫面，尚未連接正式八字演算法。\\n" +
-        "正式版上線後，這裡會顯示：\\n" +
-        "• 年柱、月柱、日柱、時柱與五行強弱\\n" +
-        "• 事業、財運、感情、健康重點提醒\\n" +
-        "• 2026–2035 十年整體趨勢建議\\n\\n" +
-        "若您有興趣讓小胡子做完整版命盤解析，\\n" +
-        "請持續關注本網站正式上線時間。";
+        "\n目前此頁仍為 Demo 版，尚未串接真正八字演算法，所以下面的內容是「示意說明」，讓你先感受之後正式版會長怎樣：\n\n";
+
+      text +=
+        "．命盤結構示意：\n" +
+        "  未來正式版會在這裡列出你的年柱、月柱、日柱、時柱，搭配五行強弱，\n" +
+        "  並用比較生活化的方式解釋，例如「火比較旺、土較弱」，代表什麼樣的個性與狀態。\n\n";
+
+      text +=
+        "．生活面向提醒：\n" +
+        "  事業與財運：會說明你在工作節奏、適合的產業、財務決策上，可以注意哪些節點。\n" +
+        "  感情與人際：提醒你在人際互動、親密關係上，在哪些時期要特別留意溝通與界線。\n" +
+        "  健康與作息：從命盤節奏搭配流年，提醒你睡眠、壓力、情緒方面需要照顧的年份。\n\n";
+
+      text +=
+        "．2026－2035 十年趨勢示意：\n" +
+        "  正式版會抓出幾個重點年份，幫你標註「適合衝刺／適合調整／適合休息」的週期，\n" +
+        "  讓你在做重大決策（換工作、投資、搬家、結婚等）時，多一個參考視角。\n\n";
+
+      text +=
+        "最後提醒：真正的命理不是決定你「能不能」，而是幫你看清「什麼時候、怎麼做比較順」。\n" +
+        "未來若你想做正式版命盤解析，小胡子會用這套系統加上人工判讀，陪你一起看接下來的路。\n";
 
       document.getElementById("result").textContent = text;
     }
