@@ -2,722 +2,600 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>小胡子命理黑金館｜線上八字試算</title>
+  <title>小胡子命理黑金館</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* ===== 全站基本設定 ===== */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", "Noto Sans TC", sans-serif;
     }
 
     body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #111827, #020617);
-      color: #f9fafb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 1080px;
-      background: radial-gradient(circle at top left,
-          rgba(251, 191, 36, 0.08),
-          transparent 55%),
-        rgba(15, 23, 42, 0.96);
-      border-radius: 24px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
-      padding: 22px 22px 26px;
-      backdrop-filter: blur(8px);
-    }
-
-    /* 頂部區 */
-
-    .app-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(55, 65, 81, 0.9);
-      padding-bottom: 10px;
-    }
-
-    .logo-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #fbbf24, #92400e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #111827;
-      font-weight: 800;
-      font-size: 18px;
-      box-shadow: 0 0 18px rgba(251, 191, 36, 0.6);
-    }
-
-    .title-text h1 {
-      font-size: 22px;
-      letter-spacing: 0.18em;
-    }
-
-    .title-text p {
-      font-size: 12px;
-      color: #9ca3af;
-      margin-top: 2px;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .badge {
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(250, 204, 21, 0.85);
-      color: #facc15;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(17, 24, 39, 0.9);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-    }
-
-    .badge-sub {
-      color: #9ca3af;
-    }
-
-    /* 主體雙欄 */
-
-    .layout {
-      display: grid;
-      grid-template-columns: 1.2fr 1.6fr;
-      gap: 18px;
-      margin-top: 14px;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .app {
-        padding: 16px 14px 22px;
-        border-radius: 18px;
-      }
-
-      .app-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .badge-row {
-        align-items: flex-start;
-      }
-    }
-
-    .card {
-      background: radial-gradient(circle at top,
-          rgba(15, 23, 42, 0.9),
-          rgba(15, 23, 42, 0.98));
-      border-radius: 16px;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      padding: 14px 14px 16px;
-    }
-
-    .card h2 {
-      font-size: 15px;
-      margin-bottom: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card h2 span.dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #f97316, #facc15);
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.7);
-    }
-
-    .card-subtitle {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 10px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      color: #e5e7eb;
-      margin-bottom: 3px;
-    }
-
-    .row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .row > div {
-      flex: 1;
-    }
-
-    input,
-    select {
-      width: 100%;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      border: 1px solid rgba(75, 85, 99, 0.95);
-      padding: 6px 11px;
-      color: #f9fafb;
-      font-size: 13px;
-      outline: none;
-    }
-
-    input::placeholder {
-      color: #6b7280;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4);
-    }
-
-    button {
-      width: 100%;
-      margin-top: 6px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #f97316, #facc15);
-      color: #111827;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-    }
-
-    button:hover {
-      filter: brightness(1.06);
-    }
-
-    .hint {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-
-    .pill-row {
-      margin-top: 9px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .pill {
-      font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px dashed rgba(75, 85, 99, 0.9);
-      color: #9ca3af;
-      background: rgba(17, 24, 39, 0.9);
-    }
-
-    .result-main {
-      font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+      background: #050509;
+      color: #f7f5f0;
       line-height: 1.7;
-      color: #e5e7eb;
-      white-space: pre-line;
-      min-height: 170px;
     }
 
-    .result-tagline {
-      font-size: 11px;
-      color: #facc15;
-      margin-top: 8px;
+    a {
+      color: #d4af37;
+      text-decoration: none;
     }
 
-    .steps {
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #f5e6c8;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, #d4af37, rgba(212, 175, 55, 0));
+      margin: 10px auto 0;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    /* ===== 頂部區塊（簡單Hero，可留可改） ===== */
+    header {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      background: radial-gradient(circle at top, #1a1206 0, #050509 55%);
+    }
+
+    .hero {
+      padding: 50px 0 40px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      margin-bottom: 10px;
+      color: #f8ecd1;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #d0c3a3;
+      margin-bottom: 20px;
+    }
+
+    .hero-btns {
       margin-top: 10px;
-      border-top: 1px dashed rgba(55, 65, 81, 0.9);
-      padding-top: 8px;
-    }
-
-    .steps-title {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 4px;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    @media (max-width: 900px) {
-      .steps-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .step-item {
-      font-size: 10px;
-      border-radius: 10px;
-      padding: 6px 7px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(17, 24, 39, 0.9);
-      color: #d1d5db;
-    }
-
-    .step-item span {
-      color: #f97316;
-      font-weight: 600;
-      margin-right: 4px;
-    }
-
-    /* 服務項目區 */
-
-    .services {
-      margin-top: 18px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(55, 65, 81, 0.9);
-    }
-
-    .services-header {
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: baseline;
-      margin-bottom: 8px;
+      justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .services-header h3 {
-      font-size: 14px;
-      letter-spacing: 0.12em;
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid #d4af37;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: transparent;
+      color: #f7f5f0;
+      transition: all 0.2s ease;
     }
 
-    .services-header p {
-      font-size: 11px;
-      color: #9ca3af;
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37, #a67c00);
+      color: #050509;
+      border-color: transparent;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.55);
     }
 
-    .services-grid {
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.6);
+    }
+
+    /* ===========================
+       ③ 服務項目區（你要的）
+       =========================== */
+    #services .section-intro {
+      max-width: 680px;
+      margin: 0 auto 30px;
+      text-align: center;
+      color: #d0c3a3;
+      font-size: 0.95rem;
+    }
+
+    .service-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
     }
 
     .service-card {
-      border-radius: 14px;
-      border: 1px solid rgba(75, 85, 99, 0.95);
-      background: linear-gradient(145deg,
-          rgba(17, 24, 39, 0.98),
-          rgba(15, 23, 42, 0.96));
-      padding: 10px 11px 11px;
-      font-size: 12px;
+      background: radial-gradient(circle at top, rgba(212, 175, 55, 0.08), rgba(0, 0, 0, 0.95));
+      border-radius: 18px;
+      padding: 18px 20px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
     }
 
-    .service-title {
-      font-size: 13px;
-      margin-bottom: 4px;
-      color: #facc15;
-    }
-
-    .service-price {
-      font-size: 11px;
-      color: #e5e7eb;
-      margin-bottom: 4px;
-    }
-
-    .service-desc {
-      font-size: 11px;
-      color: #9ca3af;
-      line-height: 1.5;
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.16), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
     }
 
     .service-tag {
-      margin-top: 6px;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      display: inline-block;
-      color: #e5e7eb;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e6d3a3;
+      margin-bottom: 4px;
+      opacity: 0.9;
     }
 
-    /* 底部 */
+    .service-title {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #f8ecd1;
+    }
 
-    .footer {
-      margin-top: 14px;
-      font-size: 10px;
-      color: #6b7280;
+    .service-price {
+      font-size: 0.9rem;
+      color: #ffd87a;
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: #d8d2c2;
+      margin-bottom: 14px;
+      min-height: 48px;
+    }
+
+    .service-meta {
+      font-size: 0.8rem;
+      color: #9c927b;
+      margin-bottom: 14px;
+    }
+
+    .service-actions {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      align-items: center;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .footer a {
-      color: #9ca3af;
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(148, 163, 184, 0.7);
+    .pill {
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      padding: 3px 9px;
+      color: #e8ddc7;
+      white-space: nowrap;
     }
 
-    .footer a:hover {
-      color: #e5e7eb;
+    .btn-mini {
+      padding: 6px 14px;
+      font-size: 0.8rem;
+    }
+
+    /* ===========================
+       ④ 八字輸入表單區（你要的）
+       =========================== */
+    #bazi-form .section-intro {
+      max-width: 680px;
+      margin: 0 auto 20px;
+      text-align: center;
+      color: #d0c3a3;
+      font-size: 0.95rem;
+    }
+
+    .form-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(7, 7, 10, 0.95);
+      border-radius: 18px;
+      padding: 20px 18px 22px;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    label {
+      color: #f1e4c6;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: #9c927b;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+      background: #050509;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 8px 12px;
+      color: #f7f5f0;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    textarea {
+      border-radius: 12px;
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #ffd87a;
+      box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.4);
+      background: #07070f;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      font-size: 0.85rem;
+    }
+
+    .checkbox-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      cursor: pointer;
+    }
+
+    .checkbox-pill input[type="checkbox"] {
+      accent-color: #d4af37;
+    }
+
+    .form-footer {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: #a6997e;
+    }
+
+    .required {
+      color: #ffb3a3;
+      margin-left: 4px;
+    }
+
+    /* ===== RWD ===== */
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      section {
+        padding: 40px 0;
+      }
+      .form-wrapper {
+        padding: 18px 14px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <!-- 頂部 Logo 區 -->
-    <div class="app-header">
-      <div class="logo-block">
-        <div class="logo-circle">胡</div>
-        <div class="title-text">
-          <h1>小胡子命理黑金館</h1>
-          <p>線上八字試算 × 品牌形象 Demo 版</p>
-        </div>
-      </div>
-      <div class="badge-row">
-        <div class="badge">
-          <div class="badge-dot"></div>
-          <span>系統內測中 · 解讀內容僅供體驗參考</span>
-        </div>
-        <div class="badge-sub">正式版預計 2026 年開放線上付費諮詢</div>
+  <!-- ========= 簡單頂部 Hero，可以保留或改成你原本的 ========= -->
+  <header>
+    <div class="container hero">
+      <h1 class="hero-title">小胡子命理黑金館</h1>
+      <p class="hero-sub">以八字為鏡，陪你看懂自己的流年、財運與人生節奏。</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn btn-primary">查看服務項目</a>
+        <a href="#bazi-form" class="btn">立即留下八字資料</a>
       </div>
     </div>
+  </header>
 
-    <!-- 主體雙欄 -->
-    <div class="layout">
-      <!-- 左：輸入區 -->
-      <div class="card">
-        <h2><span class="dot"></span> 基本資料輸入區</h2>
-        <p class="card-subtitle">
-          目前為「年柱＋五行」示意版，讓你感受未來正式版流程與風格。
-        </p>
+  <!-- ========================
+       ③ 服務項目區塊（重點1）
+       ======================== -->
+  <section id="services">
+    <div class="container">
+      <h2>八字服務項目</h2>
+      <p class="section-intro">
+        依照不同需求，提供由淺入深的八字解讀。<br />
+        線上解說搭配文字整理，可選擇 LINE 或 E-mail 收到解析結果。
+      </p>
 
-        <div class="row">
-          <div>
-            <label>公曆生日（西元）</label>
-            <input id="birthDate" type="date" />
-          </div>
-          <div>
-            <label>出生時間（時辰）</label>
-            <select id="birthHour">
-              <option value="">不確定時辰</option>
-              <option value="23">子時 23:00–00:59</option>
-              <option value="1">丑時 01:00–02:59</option>
-              <option value="3">寅時 03:00–04:59</option>
-              <option value="5">卯時 05:00–06:59</option>
-              <option value="7">辰時 07:00–08:59</option>
-              <option value="9">巳時 09:00–10:59</option>
-              <option value="11">午時 11:00–12:59</option>
-              <option value="13">未時 13:00–14:59</option>
-              <option value="15">申時 15:00–16:59</option>
-              <option value="17">酉時 17:00–18:59</option>
-              <option value="19">戌時 19:00–20:59</option>
-              <option value="21">亥時 21:00–22:59</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label>性別</label>
-            <select id="gender">
-              <option value="female">女性</option>
-              <option value="male">男性</option>
-            </select>
-          </div>
-          <div>
-            <label>出生地</label>
-            <input id="birthPlace" type="text" placeholder="例：台北市 / 高雄市" />
-          </div>
-        </div>
-
-        <button onclick="calcBazi()">生成年柱＋五行示意解析</button>
-
-        <p class="hint">
-          ※ 本系統目前只計算「年柱＋五行傾向」，視為 Demo 體驗版。<br />
-          真正專業諮詢仍需搭配月、日、時柱與大運流年，由小胡子親自解讀。
-        </p>
-
-        <div class="pill-row">
-          <div class="pill">年柱干支試算</div>
-          <div class="pill">五行屬性簡易解說</div>
-          <div class="pill">之後可接正式八字引擎</div>
-        </div>
-      </div>
-
-      <!-- 右：結果＋說明 -->
-      <div class="card">
-        <h2><span class="dot"></span> 示意解析結果區</h2>
-        <p class="card-subtitle">
-          先用年柱的干支與五行，搭配性別、簡單給你一個「氣質與大方向」感覺。
-        </p>
-
-        <div id="result" class="result-main">
-請先在左側輸入您的生日與基本資料，然後點擊「生成年柱＋五行示意解析」。
-
-系統會幫你做三件事：
-1. 用西元年份推算出你的「年柱干支」（例如：甲子年、丙寅年……）
-2. 找出該天干所屬五行（木火土金水），作為你的整體氣質底色
-3. 用文字說明這種五行調性的優點、盲點與大致適合發展方向
-
-目前是示意版，不取代正式命理判斷，但可以先用來玩玩、感受一下風格。
-        </div>
-
-        <div class="result-tagline">
-          提醒：命盤不是限制你的人生，而是幫你看見「比較順的節奏」。
-        </div>
-
-        <div class="steps">
-          <div class="steps-title">未來正式服務流程規劃（草案）：</div>
-          <div class="steps-grid">
-            <div class="step-item">
-              <span>01</span> 線上填寫基本資料、問題與聯絡方式
-            </div>
-            <div class="step-item">
-              <span>02</span> 系統自動排盤，產出初步報告
-            </div>
-            <div class="step-item">
-              <span>03</span> 小胡子人工覆盤，加入生活化解讀
-            </div>
-            <div class="step-item">
-              <span>04</span> 約時間線上或面談一對一說明
-            </div>
-            <div class="step-item">
-              <span>05</span> 提供 PDF / 文字版重點整理
-            </div>
-            <div class="step-item">
-              <span>06</span> 後續一年內可追蹤 1～2 次近況
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 服務項目區 -->
-    <div class="services" id="services">
-      <div class="services-header">
-        <h3>服務項目 · 草案</h3>
-        <p>這裡可以當成之後正式官網的「產品列表」，慢慢調整內容與價格。</p>
-      </div>
-      <div class="services-grid">
+      <div class="service-grid">
+        <!-- 卡片1：基礎排盤 -->
         <div class="service-card">
-          <div class="service-title">A. 線上八字簡易試算</div>
-          <div class="service-price">目前：Demo 免費體驗</div>
-          <div class="service-desc">
-            透過系統快速生成年柱與五行傾向，搭配 3～5 點生活提醒，適合先感受命理風格、互相認識。
+          <div class="service-tag">Basic</div>
+          <div class="service-title">八字基礎排盤</div>
+          <div class="service-price">NT$ 99｜約 5–10 分鐘文字說明</div>
+          <p class="service-desc">
+            幫你排出本命八字，簡單說明日主強弱、五行比例，讓你先認識自己的先天設定。
+          </p>
+          <p class="service-meta">
+            適合：第一次接觸八字、想先了解自己基本命格的人。
+          </p>
+          <div class="service-actions">
+            <span class="pill">內含排盤圖片</span>
+            <a href="#bazi-form" class="btn btn-mini btn-primary">我要體驗</a>
           </div>
-          <div class="service-tag">未來可嵌入自動回信＋PDF</div>
         </div>
 
+        <!-- 卡片2：深度解析 -->
         <div class="service-card">
-          <div class="service-title">B. 深度命盤解析（90 分鐘）</div>
-          <div class="service-price">建議售價：NT$ 2,XXX～3,XXX（可再調整）</div>
-          <div class="service-desc">
-            以四柱八字搭配大運流年，針對事業、財務、感情、人際逐一說明，並給出 1～3 年內可操作的行動方向。
+          <div class="service-tag">Deep</div>
+          <div class="service-title">八字深度解析</div>
+          <div class="service-price">NT$ 599｜約 40–60 分鐘線上解說</div>
+          <p class="service-desc">
+            解析個性特質、適合的工作模式、感情互動風格與人生關鍵課題，搭配近期重點提醒。
+          </p>
+          <p class="service-meta">
+            適合：正面臨人生選擇、職涯規劃、感情困惑，希望釐清方向的人。
+          </p>
+          <div class="service-actions">
+            <span class="pill">線上一對一解說</span>
+            <a href="#bazi-form" class="btn btn-mini btn-primary">預約深度解析</a>
           </div>
-          <div class="service-tag">可搭配線上諮詢＋錄音檔</div>
         </div>
 
+        <!-- 卡片3：流年運勢 -->
         <div class="service-card">
-          <div class="service-title">C. 年度流年整理＋追蹤</div>
-          <div class="service-price">建議售價：NT$ 1,XXX 起（視內容調整）</div>
-          <div class="service-desc">
-            每年幫你整理當年度重點月份與注意事項，可加價搭配半年或一年的追蹤，適合正在轉職、創業或人生轉折期的朋友。
+          <div class="service-tag">Year</div>
+          <div class="service-title">流年運勢重點</div>
+          <div class="service-price">NT$ 399｜解析 1 年重點運勢</div>
+          <p class="service-desc">
+            針對今年（或指定年份）說明事業、財運、感情、健康四大面向的高低起伏與提醒。
+          </p>
+          <p class="service-meta">
+            適合：想知道「今年適合衝刺還是調整」、「適合換工作／投資嗎？」的人。
+          </p>
+          <div class="service-actions">
+            <span class="pill">可指定西元年份</span>
+            <a href="#bazi-form" class="btn btn-mini btn-primary">看我的流年</a>
           </div>
-          <div class="service-tag">之後可加購「進階會員」方案</div>
+        </div>
+
+        <!-- 卡片4：合婚、感情 -->
+        <div class="service-card">
+          <div class="service-tag">Love</div>
+          <div class="service-title">合婚＆感情解析</div>
+          <div class="service-price">NT$ 499｜雙方八字對照分析</div>
+          <p class="service-desc">
+            分析兩人相處模式、衝突點與互補之處，提供相處建議與關係經營方向。
+          </p>
+          <p class="service-meta">
+            適合：穩定交往、準備結婚、或想了解關係走向的你／你們。
+          </p>
+          <div class="service-actions">
+            <span class="pill">需提供雙方資料</span>
+            <a href="#bazi-form" class="btn btn-mini btn-primary">填寫雙方資料</a>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- 底部 -->
-    <div class="footer">
-      <div>© 2026 小胡子命理黑金館 · 本頁為 Demo 版 · 不作實際命理依據</div>
-      <div>
-        之後可放：<a href="#">LINE 預約</a> ·
-        <a href="#">IG / FB 粉專</a>
+  <!-- ========================
+       ④ 八字輸入表單（重點2）
+       ======================== -->
+  <section id="bazi-form">
+    <div class="container">
+      <h2>留下你的八字資料</h2>
+      <p class="section-intro">
+        請盡量填寫完整，讓解析更精準。<br />
+        送出後小胡會透過你選擇的聯絡方式與你確認服務與時間。
+      </p>
+
+      <div class="form-wrapper">
+        <form id="baziForm">
+          <div class="form-grid">
+            <!-- 姓名 -->
+            <div class="form-group">
+              <label for="name">姓名<span class="required">*</span></label>
+              <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required />
+            </div>
+
+            <!-- 性別 -->
+            <div class="form-group">
+              <label for="gender">性別<span class="required">*</span></label>
+              <select id="gender" name="gender" required>
+                <option value="">請選擇</option>
+                <option value="female">女</option>
+                <option value="male">男</option>
+                <option value="other">其他／不方便透露</option>
+              </select>
+            </div>
+
+            <!-- 出生日期 -->
+            <div class="form-group">
+              <label for="birthdate">出生日期（國曆）<span class="required">*</span></label>
+              <input type="date" id="birthdate" name="birthdate" required />
+              <span class="hint">如已知農曆，可在備註補充。</span>
+            </div>
+
+            <!-- 出生時間 -->
+            <div class="form-group">
+              <label for="birthtime">出生時間<span class="required">*</span></label>
+              <select id="birthtime" name="birthtime" required>
+                <option value="">請選擇</option>
+                <option value="no-idea">不清楚時辰</option>
+                <option value="00-01">子時 23:00–00:59</option>
+                <option value="01-03">丑時 01:00–02:59</option>
+                <option value="03-05">寅時 03:00–04:59</option>
+                <option value="05-07">卯時 05:00–06:59</option>
+                <option value="07-09">辰時 07:00–08:59</option>
+                <option value="09-11">巳時 09:00–10:59</option>
+                <option value="11-13">午時 11:00–12:59</option>
+                <option value="13-15">未時 13:00–14:59</option>
+                <option value="15-17">申時 15:00–16:59</option>
+                <option value="17-19">酉時 17:00–18:59</option>
+                <option value="19-21">戌時 19:00–20:59</option>
+                <option value="21-23">亥時 21:00–22:59</option>
+              </select>
+              <span class="hint">若只知道「大概幾點」，可在備註再補充。</span>
+            </div>
+
+            <!-- 出生地 -->
+            <div class="form-group">
+              <label for="birthplace">出生地</label>
+              <input type="text" id="birthplace" name="birthplace" placeholder="例：台灣新北市淡水區" />
+            </div>
+
+            <!-- 想諮詢項目 -->
+            <div class="form-group">
+              <label>想諮詢的項目<span class="required">*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="basic" /> 基礎命格
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="career" /> 事業／工作
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="money" /> 財運
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="love" /> 感情／婚姻
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="year" /> 流年運勢
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="topic" value="other" /> 其他（備註說明）
+                </label>
+              </div>
+              <span class="hint">可複選。</span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="如需以信件寄送解析可填寫"
+              />
+            </div>
+
+            <!-- LINE -->
+            <div class="form-group">
+              <label for="line">LINE ID / 顯示名稱<span class="required">*</span></label>
+              <input
+                type="text"
+                id="line"
+                name="line"
+                placeholder="請填寫常用的 LINE，方便與你聯繫"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- 備註 -->
+          <div class="form-group">
+            <label for="note">其他想說的話／目前遇到的狀況</label>
+            <textarea
+              id="note"
+              name="note"
+              placeholder="可以簡單描述你現在最在意的問題，讓解析更聚焦。"
+            ></textarea>
+          </div>
+
+          <div class="form-footer">
+            <div>
+              <span class="hint">
+                送出後約 1–2 個工作天內由小胡與你確認服務內容與匯款方式。
+              </span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-mini">
+              送出資料給小胡
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- ===== 簡單頁尾 ===== -->
+  <footer>
+    <div class="container" style="padding: 25px 0 35px; text-align: center; font-size: 0.8rem; color: #8f846c;">
+      小胡子命理黑金館 ｜ 睿煬旅行社 ｜ 本頁內容僅供命理參考，請勿作為醫療或投資唯一依據。
+    </div>
+  </footer>
+
+  <!-- ===== 簡單前端處理送出（目前只跳訊息，不會真的寄出） ===== -->
   <script>
-    // ===== 八字基礎：年柱＋五行演算法（簡化示意版） =====
+    document.getElementById("baziForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    const STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
-    const BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+      // 這裡先做「假送出」，之後你要串 LINE / Google 表單再改
+      alert("資料已暫存成功！\\n請記得主動加入小胡 LINE，或等待小胡與你聯繫確認服務喔。");
 
-    const HOUR_BRANCH = [
-      { value: "23", name: "子" },
-      { value: "1", name: "丑" },
-      { value: "3", name: "寅" },
-      { value: "5", name: "卯" },
-      { value: "7", name: "辰" },
-      { value: "9", name: "巳" },
-      { value: "11", name: "午" },
-      { value: "13", name: "未" },
-      { value: "15", name: "申" },
-      { value: "17", name: "酉" },
-      { value: "19", name: "戌" },
-      { value: "21", name: "亥" }
-    ];
-
-    function getYearStemBranch(year) {
-      // 以 1984 甲子年為基準
-      const base = 1984;
-      let offset = year - base;
-      // 防負數
-      offset = ((offset % 60) + 60) % 60;
-      const stem = STEMS[offset % 10];
-      const branch = BRANCHES[offset % 12];
-      return { stem, branch, text: stem + branch + "年" };
-    }
-
-    function getElementOfStem(stem) {
-      if (["甲", "乙"].includes(stem)) return "木";
-      if (["丙", "丁"].includes(stem)) return "火";
-      if (["戊", "己"].includes(stem)) return "土";
-      if (["庚", "辛"].includes(stem)) return "金";
-      return "水"; // 壬、癸
-    }
-
-    function getElementDescription(element, gender) {
-      const isFemale = gender === "female";
-      switch (element) {
-        case "木":
-          return (
-            "五行屬木，代表成長、延伸與理想感。\n" +
-            (isFemale
-              ? "個性多半帶有溫柔與韌性，重感情也重義氣，對家人與朋友很用心。"
-              : "個性多半直率、有想法，遇到事情不喜歡拖泥帶水，講求方向感。") +
-            "\n職涯上適合與教育、設計、顧問、文化相關的領域，或是需要持續學習成長的工作。"
-          );
-        case "火":
-          return (
-            "五行屬火，代表熱情、表現與爆發力。\n" +
-            (isFemale
-              ? "你身上有一種容易成為焦點的氣場，對喜歡的事情投入度很高，也很看重被理解與支持。"
-              : "你行動力強、反應快，有時候講話直接一點，但多半出於真心與急性子。") +
-            "\n職涯上適合需要舞台感或溝通互動多的角色，例如業務、行銷、表演、創業等。"
-          );
-        case "土":
-          return (
-            "五行屬土，代表穩定、承擔與現實感。\n" +
-            "你多半給人可靠、踏實的印象，事情到了你手上，別人會比較放心，雖然有時候也會比較悶在心裡。 " +
-            "\n職涯上適合需要長期耕耘的領域，例如不動產、金融、行政管理、顧問、背後支撐型角色。"
-          );
-        case "金":
-          return (
-            "五行屬金，代表規則、判斷與執行力。\n" +
-            (isFemale
-              ? "你在原則與界線上比較清楚，對自己要求也不算低，做事希望有效率、有成果。"
-              : "你適合扛責任，也有能力做決策，只是有時候要記得放鬆，不用每件事都硬撐。") +
-            "\n職涯上適合需要分析、管理、制度面較明確的產業，如金融、法律、管理職、科技等。"
-          );
-        case "水":
-        default:
-          return (
-            "五行屬水，代表流動、智慧與彈性。\n" +
-            "你觀察力細膩、感受力強，會習慣先看清楚周遭再行動，適合做需要溝通協調、洞察人心的工作。" +
-            "\n職涯上適合顧問、諮商、旅遊服務、國際貿易、寫作、自媒體等需要流動與變化的領域。"
-          );
-      }
-    }
-
-    function getHourBranchText(hourValue) {
-      if (!hourValue) return "（未輸入時辰，此處暫以年柱為主。）";
-      const found = HOUR_BRANCH.find(h => h.value === hourValue);
-      if (!found) return "";
-      return "時柱地支約為「" + found.name + "時」，正式版會再搭配日柱一起細看作息與生活節奏。";
-    }
-
-    function calcBazi() {
-      const dateValue = document.getElementById("birthDate").value;
-      const hourValue = document.getElementById("birthHour").value;
-      const genderValue = document.getElementById("gender").value;
-      const placeValue = document.getElementById("birthPlace").value.trim();
-
-      if (!dateValue) {
-        alert("請先選擇公曆生日喔！");
-        return;
-      }
-
-      const d = new Date(dateValue);
-      if (isNaN(d.getTime())) {
-        alert("日期格式好像怪怪的，再確認一次～");
-        return;
-      }
-
-      const year = d.getFullYear();
-      const { stem, branch, text } = getYearStemBranch(year);
-      const element = getElementOfStem(stem);
-      const elementDesc = getElementDescription(element, genderValue);
-      const hourBranchText = getHourBranchText(hourValue);
-
-      let header =
-        "【小胡子黑金館 · 年柱＋五行示意解析】\n\n" +
-        "生日（西元）： " + dateValue + "\n" +
-        "性別： " + (genderValue === "female" ? "女性" : "男性") + "\n";
-      if (placeValue) header += "出生地： " + placeValue + "\n";
-
-      header += "\n一、年柱干支（示意）：\n";
-      header += "　▶ 推算結果：約為「" + text + "」\n";
-      header += "　　其中「" + stem + "」屬天干，「" + branch + "」屬地支。\n";
-
-      header += "\n二、五行屬性（以年干為底色）：\n";
-      header += "　▶ 年干「" + stem + "」五行屬：「" + element + "」\n\n";
-      header += elementDesc + "\n";
-
-      header += "\n三、時辰與生活節奏（簡述）：\n";
-      header += "　▶ " + hourBranchText + "\n";
-
-      header +=
-        "\n四、小胡子的溫馨提醒：\n" +
-        "　1. 目前僅以「年柱」與「五行」做大方向示意，正式判讀仍需加入月、日、時柱與大運流年。\n" +
-        "　2. 命盤不是標籤，而是看見你的節奏與強項，幫你選擇更順的路，而不是把你關在框架裡。\n" +
-        "　3. 若未來想做正式版解析，可以把這個畫面截圖留存，當成預約時的參考資料。\n";
-
-      document.getElementById("result").textContent = header;
-    }
+      // 如果你不想清空表單，可以把這行註解掉
+      e.target.reset();
+    });
   </script>
 </body>
 </html>
